@@ -14,7 +14,7 @@ function App() {
             });
             console.log('Usuário registrado com sucesso:', response.data);
         } catch (error) {
-            console.error('Erro ao registrar usuário:', error);
+            console.error('Erro ao registrar o usuário:', error);
         }
     };
 
