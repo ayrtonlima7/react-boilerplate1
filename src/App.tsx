@@ -14,9 +14,14 @@ function App() {
         console.log('Usuário cadastrado!', user.data)
     };
 
+    const handleGetUser = async () => {
+        const checkUser = await axios.get('http://localhost:5000/register/:id');
+        console.log('Usuário:', checkUser)
+    };
+
     const handleGetUsers = async () => {
-        const resposta = await axios.get('http://localhost:5000/register');
-        console.log('Lista de usuários:', resposta.data);
+        const checkAllUsers = await axios.get('http://localhost:5000/register');
+        console.log('Lista de usuários:', checkAllUsers.data);
     };
 
     return (
@@ -59,7 +64,14 @@ function App() {
                         style={{padding: 5, boxShadow: '1px 1px 1px black'}}
                         onClick={handleGetUsers}
                     >
-                        Checar
+                        Exibir usuários
+                    </button>
+
+                    <button
+                        style={{padding: 5, boxShadow: '1px 1px 1px black'}}
+                        onClick={handleGetUser}
+                    >
+                        Checar Usuário
                     </button>
 
                     <button
