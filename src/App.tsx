@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import {useState} from 'react';
 import axios from 'axios';
 import './App.css';
 
@@ -7,40 +7,73 @@ function App() {
     const [password, setPassword] = useState('');
 
     const handleRegister = async () => {
-        try {
-            const response = await axios.post('http://localhost:5000/register', {
-                email,
-                password,
-            });
-            console.log('Usuário registrado com sucesso:', response.data);
-        } catch (error) {
-            console.error('Erro ao registrar o usuário:', error);
-        }
+        const user = await axios.post('http://localhost:5000/register', {
+            email,
+            password,
+        });
+        console.log('Usuário cadastrado!', user.data)
+    };
+
+    const handleGetUsers = async () => {
+        const resposta = await axios.get('http://localhost:5000/register');
+        console.log('Lista de usuários:', resposta.data);
     };
 
     return (
         <div className="App">
             <div className="Container">
-                <h1>Formulário API</h1>
+                <h1>CRUD</h1>
+
                 <input
-                    style={{ width: 150, marginBottom: 10 }}
+                    style={{width: 150, marginBottom: 10}}
                     placeholder="E-mail"
-                    value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    value={email}
                 />
+
                 <input
-                    style={{ width: 150, marginBottom: 10 }}
+                    style={{width: 150, marginBottom: 10}}
                     type="password"
                     placeholder="Senha"
-                    value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    value={password}
                 />
-                <button
-                    style={{ padding: 5, boxShadow: "1px 1px 1px black" }}
-                    onClick={handleRegister}
+
+                <div
+                    className="buttons"
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'space-evenly',
+                        marginTop: 10,
+                        width: '65%',
+                    }}
                 >
-                    Registrar
-                </button>
+                    <button
+                        style={{padding: 5, boxShadow: '1px 1px 1px black'}}
+                        onClick={handleRegister}
+                    >
+                        Registrar
+                    </button>
+
+                    <button
+                        style={{padding: 5, boxShadow: '1px 1px 1px black'}}
+                        onClick={handleGetUsers}
+                    >
+                        Checar
+                    </button>
+
+                    <button
+                        style={{padding: 5, boxShadow: '1px 1px 1px black'}}
+                    >
+                        Alterar
+                    </button>
+
+                    <button
+                        style={{padding: 5, boxShadow: '1px 1px 1px black'}}
+                    >
+                        Deletar
+                    </button>
+                </div>
             </div>
         </div>
     );
